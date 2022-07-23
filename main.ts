@@ -78,10 +78,18 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onHitWall(SpriteKind.Player, function (sprite, location) {
+	
+})
+scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
+    level += 1
+    createMap()
+})
 function createMap () {
     if (level == 1) {
         tiles.setCurrentTilemap(tilemap`level1`)
     } else if (level == 2) {
+        tiles.setCurrentTilemap(tilemap`level12`)
         scene.setBackgroundImage(img`
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             9999999999999999999999999999999999999999999999999999111111111119999999999999999999999999999999999999991111999999999999999999999999999999999999999999111111111111
@@ -222,10 +230,13 @@ function createMap () {
             . . . f f f . . . . f f f f . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Projectile)
-        car.setPosition(10, 80)
+        car.setPosition(2, 80)
         car.setVelocity(50, 0)
         hero.setFlag(SpriteFlag.Invisible, true)
-    } else if (car.isHittingTile(CollisionDirection.Left)) {
+        hero.setPosition(10, 80)
+        level += 1
+    } else if (level == 3) {
+        hero.setFlag(SpriteFlag.Invisible, false)
         scene.setBackgroundImage(img`
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -349,7 +360,6 @@ function createMap () {
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             `)
         tiles.setCurrentTilemap(tilemap`level7`)
-        hero.setFlag(SpriteFlag.Invisible, false)
         car.setFlag(SpriteFlag.Invisible, true)
     } else if (false) {
     	
@@ -379,7 +389,7 @@ function createGirl () {
         . . . . f f . . f f . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(hero, 100, 100)
-    tiles.placeOnRandomTile(hero, sprites.castle.saplingPine)
+    tiles.placeOnRandomTile(hero, sprites.castle.shrub)
     scene.cameraFollowSprite(hero)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
