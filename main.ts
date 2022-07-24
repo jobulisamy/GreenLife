@@ -10,83 +10,83 @@ namespace StatusBarKind {
     export const CO2 = StatusBarKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    if (year == 0) {
-        if (day == 1) {
-            if (level == 0) {
+    if (year == 1) {
+        if (level == 0) {
+            level += 1
+            createMap()
+        }
+        if (level == 1) {
+            if (houseComplete == 3) {
                 level += 1
                 createMap()
+            } else {
+                game.splash("Shower, eat, and watch some TV.")
             }
-            if (level == 1) {
-                if (houseComplete == 3) {
-                    level += 1
-                    createMap()
-                } else {
-                    game.splash("Shower, eat, and watch some TV.")
-                }
-            } else if (level == 3) {
-                game.splash("You have reached the Office. ")
-                game.showLongText("You will now be asked 5 qustions that will determine your job.", DialogLayout.Full)
-                game.showLongText("Answer correctly and you will get a high paying job and you will be able to buy objects to reduce your carbon emmisions", DialogLayout.Full)
-                game.showLongText("Answer incorrectly and you will get a lower paying job", DialogLayout.Full)
-                game.showLongText("To make things more interesting, the higher paying jobs will be farther away from your home. ", DialogLayout.Full)
-                game.showLongText("So you will burn more CO2 while driving there.", DialogLayout.Full)
-                game.showLongText("Good luck and make sure to use the resources!", DialogLayout.Full)
-                game.showLongText("What very strong greenhouse gas does wasting food emmit? ", DialogLayout.Full)
-                ans2 = game.askForString("A. Carbon Dioxide B. Methane C. Oxygen ", 1)
-                jobScore = 0
-                if (ans1 == "b") {
-                    CO2bar.value += 2
-                    jobScore += 1
-                } else {
-                    CO2bar.value += 4
-                }
-                game.showLongText("What is a healthier (environmentally safer) option to factory-farmed red meats?", DialogLayout.Full)
-                game.showLongText("A. Organic red meat B. Artificial meat C. Cheeseburgers ", DialogLayout.Full)
-                ans3 = game.askForString("A, B, or C", 1)
-                if (ans3 == "ab") {
-                    CO2bar.value += 5
-                    jobScore += 1
-                } else {
-                    CO2bar.value += 10
-                }
-                game.showLongText("True or False | Switching to LED lights is one way to reduce energy consumption in your household.", DialogLayout.Full)
-                ans4 = game.askForString("T or F", 1)
-                if (ans4 == "t") {
-                    CO2bar.value += 5
-                    jobScore += 1
-                } else {
-                    CO2bar.value += 10
-                }
-                game.showLongText("True or False | Lobbying your government representatives and officials about climate change has a huge impact. ", DialogLayout.Full)
-                ans5 = game.askForString("T or F", 1)
-                if (ans5 == "t") {
-                    CO2bar.value += 5
-                    jobScore += 1
-                } else {
-                    CO2bar.value += 10
-                }
-                game.showLongText("How much water does turning off the tap while brushing for 2 minutes save (per day) ", DialogLayout.Full)
-                ans6 = game.askForString("A. 4 gallons B. 1 gallon C. 2 gallons D. 8 gallons", 1)
-                if (ans6 == "d") {
-                    CO2bar.value += 5
-                    jobScore += 1
-                } else {
-                    CO2bar.value += 10
-                }
-                if (jobScore >= 4) {
-                    game.splash("You are a doctor. Salary: $240,000. Distance: High.")
-                    salary = 240000
-                } else if (jobScore == 3) {
-                    game.splash("You are a software engineer. Salary: $120,000. Distance: Medium")
-                    salary = 120000
-                } else if (jobScore <= 2) {
-                    game.splash("You are Marketing Manager. Salary: $85,000. Distance: Low")
-                    salary = 85000
-                }
-                level += 1
-                createMap()
+        } else if (level == 3) {
+            game.splash("You have reached the Office. ")
+            game.showLongText("You will now be asked 5 qustions that will determine your job.", DialogLayout.Full)
+            game.showLongText("Answer correctly and you will get a high paying job and you will be able to buy objects to reduce your carbon emmisions", DialogLayout.Full)
+            game.showLongText("Answer incorrectly and you will get a lower paying job", DialogLayout.Full)
+            game.showLongText("To make things more interesting, the higher paying jobs will be farther away from your home. ", DialogLayout.Full)
+            game.showLongText("So you will burn more CO2 while driving there.", DialogLayout.Full)
+            game.showLongText("Good luck and make sure to use the resources!", DialogLayout.Full)
+            game.showLongText("What very strong greenhouse gas does wasting food emmit? ", DialogLayout.Full)
+            ans2 = game.askForString("A. Carbon Dioxide B. Methane C. Oxygen ", 1)
+            jobScore = 0
+            if (ans1 == "b") {
+                CO2bar.value += rightAnswerChange
+                jobScore += 1
+            } else {
+                CO2bar.value += wrongAnswerChange
             }
-        } else if (day == 2) {
+            game.showLongText("What is a healthier (environmentally safer) option to factory-farmed red meats?", DialogLayout.Full)
+            game.showLongText("A. Organic red meat B. Artificial meat C. Cheeseburgers ", DialogLayout.Full)
+            ans3 = game.askForString("A, B, or C", 1)
+            if (ans3 == "a") {
+                CO2bar.value += rightAnswerChange
+                jobScore += 1
+            } else {
+                CO2bar.value += wrongAnswerChange
+            }
+            game.showLongText("True or False | Switching to LED lights is one way to reduce energy consumption in your household.", DialogLayout.Full)
+            ans4 = game.askForString("T or F", 1)
+            if (ans4 == "t") {
+                CO2bar.value += rightAnswerChange
+                jobScore += 1
+            } else {
+                CO2bar.value += wrongAnswerChange
+            }
+            game.showLongText("True or False | Lobbying your government representatives and officials about climate change has a huge impact. ", DialogLayout.Full)
+            ans5 = game.askForString("T or F", 1)
+            if (ans5 == "t") {
+                CO2bar.value += rightAnswerChange
+                jobScore += 1
+            } else {
+                CO2bar.value += wrongAnswerChange
+            }
+            game.showLongText("How much water does turning off the tap while brushing for 2 minutes save (per day)?", DialogLayout.Full)
+            ans6 = game.askForString("A. 4 gallons B. 1 gallon C. 2 gallons D. 8 gallons", 1)
+            if (ans6 == "d") {
+                CO2bar.value += rightAnswerChange
+                jobScore += 1
+            } else {
+                CO2bar.value += wrongAnswerChange
+            }
+            if (jobScore >= 4) {
+                game.splash("You are a doctor. Salary: $240,000. Distance: High.")
+                salary = 240000
+            } else if (jobScore == 3) {
+                game.splash("You are a software engineer. Salary: $120,000. Distance: Medium")
+                salary = 120000
+            } else if (jobScore <= 2) {
+                game.splash("You are Marketing Manager. Salary: $85,000. Distance: Low")
+                salary = 85000
+            }
+            level += 1
+            createMap()
+        }
+    } else if (year >= 2) {
+        if (year == 2) {
             if (level == 1) {
                 if (houseComplete == 3) {
                     level += 1
@@ -98,23 +98,33 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
                 game.showLongText("How much CO2 does a gallon of gasoline burn? (kilograms)", DialogLayout.Full)
                 ans11 = game.askForString("A. 3.5 B. 8.8 C. 10 D. 5.6 ", 1)
                 if (ans11 == "b") {
-                    CO2bar.value += 5
+                    checkReduceRight()
                 } else {
-                    CO2bar.value += 10
+                    checkReduceWrong()
                 }
                 level += 1
                 createMap()
-            } else {
-            	
+            }
+        } else if (year == 3) {
+            if (level == 1) {
+                if (houseComplete == 3) {
+                    level += 1
+                    createMap()
+                } else {
+                    game.splash("Shower, eat, and watch some TV.")
+                }
+            } else if (level == 3) {
+                game.showLongText("True or False | Flying first-class emits 9x more co2 than economy class.", DialogLayout.Full)
+                ans14 = game.askForString("t or f", 1)
+                if (ans14 == "t") {
+                    checkReduceRight()
+                } else {
+                    checkReduceWrong()
+                }
+                level += 1
+                createMap()
             }
         }
-    } else if (year == 1) {
-        info.setScore(salary)
-        game.splash("You now have a chance to buy things!")
-        game.splash("These objects will help you reduce your co2 emmissions.")
-        storeAsk1 = game.askForString("T or F", 1)
-    } else {
-    	
     }
 })
 function createCO2bar () {
@@ -126,96 +136,184 @@ function createCO2bar () {
     CO2bar.setLabel("CO2 level", 15)
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.stopAnimation(animation.AnimationTypes.All, hero)
-    animation.runImageAnimation(
-    hero,
-    [img`
-        . f f f . f f f f . f f f . 
-        f f f f f c c c c f f f f f 
-        f f f f b c c c c b f f f f 
-        f f f c 3 c c c c 3 c f f f 
-        . f 3 3 c c c c c c 3 3 f . 
-        . f c c c c c c c c c c f . 
-        . f f c c c c c c c c f f . 
-        . f f f c c c c c c f f f . 
-        . f f f f f f f f f f f f . 
-        . . f f f f f f f f f f . . 
-        . . e f f f f f f f f e . . 
-        . e 4 f f f f f f f f 4 e . 
-        . 4 d f 3 3 3 3 3 3 c d 4 . 
-        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
-        . . . . f f f f f f . . . . 
-        . . . . f f . . f f . . . . 
-        `,img`
-        . . . . . . . . . . . . . . 
-        . f f f . f f f f . f f f . 
-        f f f f f c c c c f f f f f 
-        f f f f b c c c c b f f f f 
-        f f f c 3 c c c c 3 c f f f 
-        . f 3 3 c c c c c c 3 3 f . 
-        . f c c c c c c c c c f f . 
-        . f f c c c c c c c c f f . 
-        . f f c c c c c c f f f f . 
-        . f f f f f f f f f f f f . 
-        . . f f f f f f f f f f . . 
-        . . e f f f f f f f f e . . 
-        . . e f f f f f f f f 4 e . 
-        . . 4 f 3 3 3 3 3 e d d 4 . 
-        . . e f f f f f f e e 4 . . 
-        . . . f f f . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . 
-        . f f f . f f f f . f f f . 
-        f f f f f c c c c f f f f f 
-        f f f f b c c c c b f f f f 
-        f f f c 3 c c c c 3 c f f f 
-        . f 3 3 c c c c c c 3 3 f . 
-        . f f c c c c c c c c c f . 
-        . f f c c c c c c c c f f . 
-        . f f f f c c c c c c f f . 
-        . f f f f f f f f f f f f . 
-        . . f f f f f f f f f f . . 
-        . . e f f f f f f f f e . . 
-        . e 4 f f f f f f f f e . . 
-        . 4 d d e 3 3 3 3 3 f 4 . . 
-        . . 4 e e f f f f f f e . . 
-        . . . . . . . . f f f . . . 
-        `],
-    100,
-    true
-    )
+    if (heroFemale1 == true) {
+        animation.stopAnimation(animation.AnimationTypes.All, hero)
+        animation.runImageAnimation(
+        hero,
+        [img`
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f c c c c c c c c c c f . 
+            . f f c c c c c c c c f f . 
+            . f f f c c c c c c f f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . e 4 f f f f f f f f 4 e . 
+            . 4 d f 3 3 3 3 3 3 c d 4 . 
+            . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+            . . . . f f f f f f . . . . 
+            . . . . f f . . f f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f c c c c c c c c c f f . 
+            . f f c c c c c c c c f f . 
+            . f f c c c c c c f f f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . . e f f f f f f f f 4 e . 
+            . . 4 f 3 3 3 3 3 e d d 4 . 
+            . . e f f f f f f e e 4 . . 
+            . . . f f f . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f f c c c c c c c c c f . 
+            . f f c c c c c c c c f f . 
+            . f f f f c c c c c c f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . e 4 f f f f f f f f e . . 
+            . 4 d d e 3 3 3 3 3 f 4 . . 
+            . . 4 e e f f f f f f e . . 
+            . . . . . . . . f f f . . . 
+            `],
+        100,
+        true
+        )
+    } else if (heroMale1 == true) {
+        animation.stopAnimation(animation.AnimationTypes.All, hero)
+        animation.runImageAnimation(
+        hero,
+        [img`
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f c c c c c c c c c c f . 
+            . f f c c c c c c c c f f . 
+            . f f f c c c c c c f f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . e 4 f f f f f f f f 4 e . 
+            . 4 d f 3 3 3 3 3 3 c d 4 . 
+            . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+            . . . . f f f f f f . . . . 
+            . . . . f f . . f f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f c c c c c c c c c f f . 
+            . f f c c c c c c c c f f . 
+            . f f c c c c c c f f f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . . e f f f f f f f f 4 e . 
+            . . 4 f 3 3 3 3 3 e d d 4 . 
+            . . e f f f f f f e e 4 . . 
+            . . . f f f . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f f c c c c c c c c c f . 
+            . f f c c c c c c c c f f . 
+            . f f f f c c c c c c f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . e 4 f f f f f f f f e . . 
+            . 4 d d e 3 3 3 3 3 f 4 . . 
+            . . 4 e e f f f f f f e . . 
+            . . . . . . . . f f f . . . 
+            `],
+        100,
+        true
+        )
+    } else {
+    	
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorLightMoss, function (sprite, location) {
-    if (day == 1) {
+    if (year == 1) {
         if (hitShower == false) {
-            game.showLongText("How many liters per minute does leaving the tap running waste? (https://www.mdx.ac.uk/news/2014/05/1-in-3-leave-the-tap-running-while-brushing-wasting-24-litres-of-water-a-day-finds-new-poll)", DialogLayout.Full)
+            game.showLongText("How many liters per minute does leaving the tap running waste? ", DialogLayout.Full)
             ans1 = game.askForString("A.2 liters B. 4 liters C. 6 liters D. 7 liters", 1)
             if (ans1 == "c") {
-                CO2bar.value += 1
+                CO2bar.value += rightAnswerChange
             } else {
-                CO2bar.value += 2
+                CO2bar.value += wrongAnswerChange
             }
             houseComplete += 1
             hitShower = true
         }
-    } else if (day == 2) {
+    } else if (year == 2) {
         if (hitShower == false) {
             game.showLongText("How much money does switching to cold water when washing clothes save (instead of using a washing machine with hot water) every year? ", DialogLayout.Full)
             ans7 = game.askForString("A. $60 B. $50 C. $70 D. $20", 1)
             if (ans7 == "a") {
-                CO2bar.value += 2
+                checkReduceRight()
             } else {
-                CO2bar.value += 4
+                checkReduceWrong()
+            }
+            houseComplete += 1
+            hitShower = true
+        }
+    } else if (year == 3) {
+        if (hitShower == false) {
+            game.showLongText("What is an environmentally safe alternative to a plastic toothbrush? ", DialogLayout.Full)
+            ans13 = game.askForString("A. B. Electric Brush C. Don't Brush D. Bamboo Brush", 1)
+            if (ans13 == "d") {
+                checkReduceRight()
+            } else {
+                checkReduceWrong()
             }
             houseComplete += 1
             hitShower = true
         }
     }
 })
+function checkReduceWrong () {
+    if ((electricCarOwned || solarPanelsOwned) >= 1) {
+        if (electricCarOwned >= 1) {
+            CO2bar.value += wrongAnswerChange / (2 * electricCarOwned)
+        }
+        if (solarPanelsOwned >= 1) {
+            CO2bar.value += wrongAnswerChange * (0.9 * solarPanelsOwned)
+        }
+    } else {
+        CO2bar.value += wrongAnswerChange
+    }
+}
 function createMap () {
-    if (day == 1) {
+    if (year == 1) {
         if (level == 0) {
-            game.splash("Day", day)
+            game.splash("Try to make it to year 4.")
+            game.splash("Year", year)
             tiles.setCurrentTilemap(tilemap`level1`)
         }
     }
@@ -497,7 +595,7 @@ function createMap () {
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             `)
         hero.destroy()
-        createGirl()
+        createPlayer()
         tiles.placeOnRandomTile(hero, assets.tile`myTile5`)
         car.destroy()
     } else if (level == 4) {
@@ -649,34 +747,9 @@ function createMap () {
     } else if (level == 5) {
         car.destroy()
         tiles.setCurrentTilemap(tilemap`level27`)
-        game.splash("End of Day ", day)
-        updateDay()
-    } else {
-    	
+        game.splash("End of Year ", year)
+        updateYear()
     }
-}
-function createGirl () {
-    hero = sprites.create(img`
-        . f f f . f f f f . f f f . 
-        f f f f f c c c c f f f f f 
-        f f f f b c c c c b f f f f 
-        f f f c 3 c c c c 3 c f f f 
-        . f 3 3 c c c c c c 3 3 f . 
-        . f c c c c 4 4 c c c c f . 
-        . f f c c 4 4 4 4 c c f f . 
-        . f f f b f 4 4 f b f f f . 
-        . f f 4 1 f d d f 1 4 f f . 
-        . . f f d d d d d d f f . . 
-        . . e f e 4 4 4 4 e f e . . 
-        . e 4 f b 3 3 3 3 b f 4 e . 
-        . 4 d f 3 3 3 3 3 3 c d 4 . 
-        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
-        . . . . f f f f f f . . . . 
-        . . . . f f . . f f . . . . 
-        `, SpriteKind.Player)
-    controller.moveSprite(hero, 100, 100)
-    tiles.placeOnRandomTile(hero, assets.tile`myTile5`)
-    scene.cameraFollowSprite(hero)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.stopAnimation(animation.AnimationTypes.All, hero)
@@ -739,33 +812,42 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    if (day == 1) {
+    if (year == 1) {
         if (hitPizza == false) {
-            game.showLongText("How much of your carbon footprint can you reduce each day you don’t eat meat or dairy?", DialogLayout.Full)
+            game.showLongText("How much of your carbon footprint can you reduce each day you don't eat meat or dairy?", DialogLayout.Full)
             ans1c = game.askForString("A.2 pounds B. 4 pounds C. 6 pounds D. 8 pounds", 1)
             if (ans1c == "d") {
-                CO2bar.value += 1
+                CO2bar.value += rightAnswerChange
             } else {
-                CO2bar.value += 2
+                CO2bar.value += wrongAnswerChange
             }
             houseComplete += 1
             hitPizza = true
         }
-    } else if (day == 2) {
+    } else if (year == 2) {
         if (hitPizza == false) {
-            let ans8 = ""
             game.showLongText("True or False | Leftover pasta water is good for your hair. ", DialogLayout.Full)
-            ans9 = game.askForString("T or F", 1)
+            ans8 = game.askForString("T or F", 1)
             if (ans8 == "t") {
-                CO2bar.value += 2
+                checkReduceRight()
             } else {
-                CO2bar.value += 4
+                checkReduceWrong()
             }
             houseComplete += 1
             hitPizza = true
         }
-    } else {
-    	
+    } else if (year == 3) {
+        if (hitPizza == false) {
+            game.showLongText("How many global natural disasters happened in 2021? ", DialogLayout.Full)
+            ans9 = game.askForString("A. 268 B. 520 C. 432 D. 600", 1)
+            if (ans9 == "c") {
+                checkReduceRight()
+            } else {
+                checkReduceWrong()
+            }
+            houseComplete += 1
+            hitPizza = true
+        }
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -831,7 +913,11 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Projectile, assets.tile`myTile7`, function (sprite, location) {
     CO2bar.value += 2
     if (salary == 85000) {
-        CO2bar.value += 1
+        CO2bar.value += 4
+    } else if (salary == 120000) {
+        CO2bar.value += 6
+    } else {
+        CO2bar.value += 10
     }
     level += 1
     createMap()
@@ -896,38 +982,117 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-function createBoy () {
-	
+function updateYear () {
+    if (year > 4) {
+        year += 1
+        level = 1
+        hero.setFlag(SpriteFlag.Invisible, false)
+        game.splash("Year", year)
+        game.splash("The CO2-meter percentage is at", CO2bar.value)
+        info.changeScoreBy(salary)
+        game.splash("You now have a chance to buy things!")
+        game.splash("These objects will help you reduce your co2 emmissions.")
+        chooseBuy()
+        createMap()
+        if (year >= 2) {
+            if (treesOwned >= 1) {
+                CO2bar.value -= 0.5 * treesOwned
+            }
+        }
+    }
 }
-function updateDay () {
-    day += 1
-    level = 1
-    hero.setFlag(SpriteFlag.Invisible, false)
-    game.splash("Day", day)
-    game.splash("The CO2-meter percentage is at", CO2bar.value)
-    createMap()
+function chooseBuy () {
+    game.showLongText("[A. Electric Car: $100,000 | Reduces new emmissions by 50%] [B. Solar Panels: $15,000 | Reduces new emmissions by 10%] [C. Trees: $10,000 | Reduces carbon meter by 0.5%]", DialogLayout.Full)
+    storeAsk1 = game.askForString("What would you like to buy?", 1)
+    if (storeAsk1 == "a") {
+        buying = electricCar
+        buying1 = "electric car"
+        howMany(electricCar, "electric car")
+electricCarOwned += store1num
+    } else if (storeAsk1 == "b") {
+        buying = solarPanels
+        buying1 = "solar panels"
+        howMany(solarPanels, "solar panels")
+solarPanelsOwned += store1num
+    } else {
+        buying = trees
+        buying1 = "Trees"
+        howMany(trees, "trees")
+treesOwned += store1num
+    }
+    buyMore1 = game.askForString("Would you like to buy more? (y or n)")
+    if (buyMore1 == "y") {
+        chooseBuy()
+    }
+}
+function createPlayer () {
+    hero = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(hero, 100, 100)
+    tiles.placeOnRandomTile(hero, assets.tile`myTile5`)
+    scene.cameraFollowSprite(hero)
+}
+function checkReduceRight () {
+    if ((electricCarOwned || solarPanelsOwned) >= 1) {
+        if (electricCarOwned >= 1) {
+            CO2bar.value += rightAnswerChange / (2 * electricCarOwned)
+        }
+        if (solarPanelsOwned >= 1) {
+            CO2bar.value += rightAnswerChange * (0.9 * solarPanelsOwned)
+        }
+    } else {
+        CO2bar.value += rightAnswerChange
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.buttonTeal, function (sprite, location) {
-    if (day == 1) {
+    if (year == 1) {
         if (hitTV == false) {
             game.showLongText("How much CO2 emissions are produced by streaming videos on YouTube (tonnes per year)? ", DialogLayout.Full)
             ans1b = game.askForString("A. 9 B. 5 C. 6 D. 11", 1)
             if (ans1b == "d") {
-                CO2bar.value += 1
+                CO2bar.value += rightAnswerChange
             } else {
-                CO2bar.value += 2
+                CO2bar.value += wrongAnswerChange
             }
             houseComplete += 1
             hitTV = true
         }
-    } else if (day == 2) {
+    } else if (year == 2) {
         if (hitTV == false) {
             game.showLongText("What is the annual CO2 emission of a typical car in the US (in tonnes)? ", DialogLayout.Full)
             ans10 = game.askForString("A. 12.1 B. 2.5 C. 4.6 D. 3", 1)
             if (ans10 == "c") {
-                CO2bar.value += 1
+                checkReduceRight()
             } else {
-                CO2bar.value += 2
+                checkReduceWrong()
+            }
+            houseComplete += 1
+            hitTV = true
+        }
+    } else if (year == 3) {
+        if (hitTV == false) {
+            game.showLongText("True or False | Aggressive driving (unnecessary braking and acceleration) burns 10% more fuel than calm driving. ", DialogLayout.Full)
+            ans12 = game.askForString("t or f", 1)
+            if (ans12 == "f") {
+                checkReduceRight()
+            } else {
+                checkReduceWrong()
             }
             houseComplete += 1
             hitTV = true
@@ -935,31 +1100,75 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.buttonTeal, function (spr
     }
 })
 let moving = false
+let ans12 = ""
 let ans10 = ""
 let ans1b = ""
+let buyMore1 = ""
+let storeAsk1 = ""
 let ans9 = ""
+let ans8 = ""
 let ans1c = ""
 let car: Sprite = null
 let hitTV = false
 let hitPizza = false
+let solarPanelsOwned = 0
+let electricCarOwned = 0
+let ans13 = ""
 let ans7 = ""
 let hitShower = false
 let hero: Sprite = null
-let storeAsk1 = ""
+let ans14 = ""
 let ans11 = ""
 let salary = 0
 let ans6 = ""
 let ans5 = ""
 let ans4 = ""
 let ans3 = ""
-let CO2bar: StatusBarSprite = null
 let ans1 = ""
 let jobScore = 0
 let ans2 = ""
 let houseComplete = 0
+let rightAnswerChange = 0
+let wrongAnswerChange = 0
 let level = 0
 let year = 0
-let day = 0
+let hero1 = false
+let heroFemale1 = false
+let heroMale1 = false
+let treesOwned = 0
+let CO2bar: StatusBarSprite = null
+let store1num = 0
+let buying = 0
+let buying1 = ""
+let trees = 0
+let solarPanels = 0
+let electricCar = 0
+game.splash("Choose a character: Male, Female, or Other")
+let charChoose = game.askForString("M, F, or Other", 1)
+if (charChoose == "m") {
+    heroMale1 = true
+} else if (charChoose == "f") {
+    heroFemale1 = true
+} else {
+    hero1 = true
+}
+function howMany(String = buying, String1 = buying1) {
+    store1num = game.askForNumber("How many would you like to buy?")
+    if (info.score() >= buying * store1num) {
+        game.splash("Purchase Successful | Item: " + buying1 + " | Quantity: " + store1num)
+
+        info.changeScoreBy(-1 * (buying * store1num))
+    } else {
+        game.splash("You do not have enough money to buy this item")
+    }
+}
+year = 1
+if (level == 3) {
+    game.splash("The game is getting harder!")
+    game.splash("Try to reach Year 4!")
+    wrongAnswerChange = 10
+    rightAnswerChange = 5
+}
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -1082,13 +1291,15 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
-let wrongAnswerChange = 4
-let rightAnswerChange = 2
-day = 1
-year = 0
+wrongAnswerChange = 6
+rightAnswerChange = 3
+year = 1
 level = 0
+electricCar = 100000
+solarPanels = 15000
+trees = 10000
 createMap()
-createGirl()
+createPlayer()
 createCO2bar()
 game.onUpdate(function () {
     moving = controller.left.isPressed() || (controller.right.isPressed() || (controller.up.isPressed() || controller.down.isPressed()))
@@ -1096,11 +1307,15 @@ game.onUpdate(function () {
         animation.stopAnimation(animation.AnimationTypes.All, hero)
     }
 })
-game.onUpdate(function () {
-	
-})
 forever(function () {
+    if (year == 4) {
+        game.splash("You made it!")
+        info.setScore(year)
+        game.over(true)
+    }
     if (CO2bar.value == 100) {
+        game.splash("So close!")
+        info.setScore(year)
         game.over(false)
     }
 })
